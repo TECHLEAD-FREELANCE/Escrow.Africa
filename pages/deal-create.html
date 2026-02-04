@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Deal - Paybill Escrow</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/deals.css">
+</head>
+<body class="deal-create-page">
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="dashboard.html" class="back-btn"><img src="../assets/back.png" alt="Back"></a>
+                <h3>Create New Deal</h3>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <form id="createDealForm" class="deal-form-main">
+            <div class="form-section">
+                <h2 class="section-title">Deal Details</h2>
+                
+                <div class="form-group">
+                    <label for="title">Deal Title *</label>
+                    <input type="text" id="title" placeholder="e.g., iPhone 15 Pro Max, Website Development" required>
+                    <small>Brief description of what's being traded</small>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description *</label>
+                    <textarea id="description" rows="5" placeholder="Provide detailed information about the deal, expectations, and deliverables..." required></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="category">Category *</label>
+                    <select id="category" required>
+                        <option value="">Select category</option>
+                        <option value="electronics">Electronics</option>
+                        <option value="vehicles">Vehicles</option>
+                        <option value="services">Services</option>
+                        <option value="real-estate">Real Estate</option>
+                        <option value="fashion">Fashion & Accessories</option>
+                        <option value="other">Other</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="amount">Amount (KES) *</label>
+                    <input type="number" id="amount" placeholder="0" min="100" required>
+                    <div class="fee-breakdown">
+                        <div class="fee-row">
+                            <span>Deal Amount:</span>
+                            <span id="dealAmountDisplay">KES 0</span>
+                        </div>
+                        <div class="fee-row">
+                            <span>Platform Fee (2%):</span>
+                            <span id="platformFee">KES 0</span>
+                        </div>
+                        <div class="fee-row total">
+                            <span>Total to Pay:</span>
+                            <span id="totalAmount">KES 0</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="timeline">Timeline / Deadline *</label>
+                    <select id="timeline" required>
+                        <option value="">Select timeline</option>
+                        <option value="1">1 Day</option>
+                        <option value="2">2 Days</option>
+                        <option value="3">3 Days</option>
+                        <option value="5">5 Days</option>
+                        <option value="7">7 Days</option>
+                        <option value="14">14 Days</option>
+                        <option value="30">30 Days</option>
+                        <option value="custom">Custom</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="photo">Upload Photo/Video (Optional)</label>
+                    <div class="file-upload-area" id="fileUploadArea">
+                        <input type="file" id="photo" accept="image/*,video/*" hidden>
+                        <div class="upload-placeholder">
+                            <span class="upload-icon">📷</span>
+                            <p>Click to upload photo or video</p>
+                            <small>Max size: 10MB</small>
+                        </div>
+                        <div class="upload-preview" id="uploadPreview" style="display: none;">
+                            <img id="previewImage" src="" alt="Preview">
+                            <button type="button" class="remove-upload" id="removeUpload">✕</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-section">
+                <h2 class="section-title">Invite Other Party</h2>
+                
+                <div class="invite-options">
+                    <button type="button" class="invite-option" id="inviteByUsername">
+                        <span class="option-icon">👤</span>
+                        <div class="option-content">
+                            <strong>Search by Username</strong>
+                            <small>Find user on Escrow.Africa</small>
+                        </div>
+                    </button>
+                    
+                    <button type="button" class="invite-option" id="shareLink">
+                        <span class="option-icon">🔗</span>
+                        <div class="option-content">
+                            <strong>Share Deal Link</strong>
+                            <small>Send via WhatsApp, SMS, etc.</small>
+                        </div>
+                    </button>
+                </div>
+
+                <div class="selected-user" id="selectedUserDisplay" style="display: none;">
+                    <div class="user-card">
+                        <div class="user-avatar" id="selectedUserAvatar">SM</div>
+                        <div class="user-info">
+                            <strong id="selectedUserName">Sarah Mburu</strong>
+                            <span id="selectedUserUsername">@seller1</span>
+                        </div>
+                        <button type="button" class="remove-user" id="removeSelectedUser">✕</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="form-actions-sticky">
+                <button type="button" class="btn-secondary" onclick="window.location.href='dashboard.html'">Cancel</button>
+                <button type="submit" class="btn-primary">Create Deal</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- User Selection Modal -->
+    <div class="modal" id="userSelectionModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Select User</h2>
+                <button class="modal-close" id="closeUserModal">✕</button>
+            </div>
+            <div class="modal-body">
+                <input type="text" placeholder="Search username..." class="search-input" id="userSearchInput">
+                <div class="user-list" id="userListContainer">
+                    <!-- Populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="deals.html" class="nav-item">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Deals</span>
+        </a>
+        <a href="deal-create.html" class="nav-item nav-item-create active">
+            <span class="nav-icon-plus">➕</span>
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">Chat</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span class="nav-label">Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/deal-create.js"></script>
+</body>
+</html>

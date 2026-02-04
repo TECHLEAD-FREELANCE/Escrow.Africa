@@ -1,0 +1,87 @@
+{
+  "transactions": [
+    {
+      "transactionId": "TXN001",
+      "userId": 1,
+      "dealId": "ESC001",
+      "type": "payment",
+      "amount": 147900,
+      "method": "M-Pesa",
+      "phoneNumber": "+254712345678",
+      "status": "completed",
+      "date": "2026-02-04T10:30:00",
+      "description": "Payment for iPhone 15 Pro Max - 256GB"
+    },
+    {
+      "transactionId": "TXN002",
+      "userId": 1,
+      "dealId": "ESC005",
+      "type": "payment",
+      "amount": 66300,
+      "method": "M-Pesa",
+      "phoneNumber": "+254712345678",
+      "status": "completed",
+      "date": "2026-01-15T14:20:00",
+      "description": "Payment for Samsung 55\" 4K Smart TV"
+    },
+    {
+      "transactionId": "TXN003",
+      "userId": 5,
+      "dealId": "ESC005",
+      "type": "withdrawal",
+      "amount": 65000,
+      "method": "M-Pesa",
+      "phoneNumber": "+254756789012",
+      "status": "completed",
+      "date": "2026-01-19T16:45:00",
+      "description": "Withdrawal for Samsung 55\" 4K Smart TV"
+    },
+    {
+      "transactionId": "TXN004",
+      "userId": 5,
+      "dealId": "ESC004",
+      "type": "payment",
+      "amount": 290700,
+      "method": "Airtel Money",
+      "phoneNumber": "+254756789012",
+      "status": "completed",
+      "date": "2026-01-22T09:15:00",
+      "description": "Payment for Honda CB 250cc Motorbike"
+    },
+    {
+      "transactionId": "TXN005",
+      "userId": 4,
+      "dealId": "ESC004",
+      "type": "withdrawal",
+      "amount": 285000,
+      "method": "M-Pesa",
+      "phoneNumber": "+254745678901",
+      "status": "completed",
+      "date": "2026-01-27T11:30:00",
+      "description": "Withdrawal for Honda CB 250cc Motorbike"
+    },
+    {
+      "transactionId": "TXN006",
+      "userId": 3,
+      "dealId": "ESC006",
+      "type": "payment",
+      "amount": 12240,
+      "method": "MTN Mobile Money",
+      "phoneNumber": "+254734567890",
+      "status": "completed",
+      "date": "2026-02-02T13:20:00",
+      "description": "Payment for Freelance Logo Design Package"
+    },
+    {
+      "transactionId": "TXN007",
+      "userId": 2,
+      "type": "deposit",
+      "amount": 5000,
+      "method": "M-Pesa",
+      "phoneNumber": "+254723456789",
+      "status": "completed",
+      "date": "2026-01-28T08:45:00",
+      "description": "Wallet top-up"
+    }
+  ]
+}

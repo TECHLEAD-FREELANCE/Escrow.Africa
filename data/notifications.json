@@ -1,0 +1,54 @@
+{
+  "notifications": [
+    {
+      "id": 1,
+      "userId": 1,
+      "type": "deal-paid",
+      "title": "Payment Successful",
+      "message": "Your payment of KES 147,900 for 'iPhone 15 Pro Max' has been received and held in escrow.",
+      "dealId": "ESC001",
+      "read": false,
+      "timestamp": "2026-02-04T10:31:00"
+    },
+    {
+      "id": 2,
+      "userId": 1,
+      "type": "deal-created",
+      "title": "New Deal Request",
+      "message": "Grace Wanjiku sent you a deal request for 'MacBook Pro 2024'.",
+      "dealId": "ESC002",
+      "read": false,
+      "timestamp": "2026-02-03T15:20:00"
+    },
+    {
+      "id": 3,
+      "userId": 1,
+      "type": "message",
+      "title": "New Message",
+      "message": "Sarah Mburu sent you a message",
+      "chatId": 1,
+      "read": true,
+      "timestamp": "2026-02-04T09:15:00"
+    },
+    {
+      "id": 4,
+      "userId": 2,
+      "type": "deal-accepted",
+      "title": "Deal Accepted",
+      "message": "John Kamau accepted your deal 'iPhone 15 Pro Max'.",
+      "dealId": "ESC001",
+      "read": false,
+      "timestamp": "2026-02-04T10:00:00"
+    },
+    {
+      "id": 5,
+      "userId": 3,
+      "type": "dispute-raised",
+      "title": "Dispute Raised",
+      "message": "A dispute has been raised for 'Freelance Logo Design Package'. Our team will review shortly.",
+      "dealId": "ESC006",
+      "read": false,
+      "timestamp": "2026-02-05T14:30:00"
+    }
+  ]
+}

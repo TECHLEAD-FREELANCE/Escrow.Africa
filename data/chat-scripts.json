@@ -1,0 +1,129 @@
+{
+  "chatScripts": [
+    {
+      "chatId": 1,
+      "participants": [1, 2],
+      "participantNames": ["John Kamau", "Sarah Mburu"],
+      "scripts": [
+        {
+          "trigger": "Hi, I'm interested in the iPhone",
+          "response": {
+            "sender": 2,
+            "message": "Hello! Yes, it's still available. iPhone 15 Pro Max, 256GB, brand new sealed.",
+            "delay": 2000
+          }
+        },
+        {
+          "trigger": "What's your best price?",
+          "response": {
+            "sender": 2,
+            "message": "I can do KES 145,000. It comes with original accessories and warranty.",
+            "delay": 1500
+          }
+        },
+        {
+          "trigger": "Can we use escrow?",
+          "response": {
+            "sender": 2,
+            "message": "Absolutely! That's the safest way. I'll create an escrow deal for us.",
+            "delay": 2000
+          }
+        },
+        {
+          "trigger": "Sounds good",
+          "response": {
+            "sender": 2,
+            "message": "Great! Let me set up the deal now. You'll review and accept it.",
+            "delay": 1800
+          }
+        },
+        {
+          "trigger": "Hello, are you available?",
+          "response": {
+            "sender": 2,
+            "message": "Yes, I'm here! How can I help you?",
+            "delay": 1500
+          }
+        }
+      ]
+    },
+    {
+      "chatId": 2,
+      "participants": [1, 4],
+      "participantNames": ["John Kamau", "Grace Wanjiku"],
+      "scripts": [
+        {
+          "trigger": "Hi Grace, saw your laptop listing",
+          "response": {
+            "sender": 4,
+            "message": "Hi John! Yes, MacBook Pro 2024, 16GB RAM, 512GB SSD. Perfect condition!",
+            "delay": 2000
+          }
+        },
+        {
+          "trigger": "How much?",
+          "response": {
+            "sender": 4,
+            "message": "KES 180,000. We can use Escrow Africa for safety.",
+            "delay": 1500
+          }
+        },
+        {
+          "trigger": "Can I see more photos?",
+          "response": {
+            "sender": 4,
+            "message": "Sure! Let me send you more pictures.",
+            "delay": 1000,
+            "attachment": {
+              "type": "image",
+              "name": "laptop-photo.jpg"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "chatId": 3,
+      "participants": [3, 2],
+      "participantNames": ["David Ochieng", "Sarah Mburu"],
+      "scripts": [
+        {
+          "trigger": "Do you do website development?",
+          "response": {
+            "sender": 2,
+            "message": "Yes! I specialize in business websites and e-commerce platforms.",
+            "delay": 2000
+          }
+        },
+        {
+          "trigger": "How much for a basic business site?",
+          "response": {
+            "sender": 2,
+            "message": "For a professional 5-page business website, KES 35,000. Includes hosting setup.",
+            "delay": 2500
+          }
+        },
+        {
+          "trigger": "Timeline?",
+          "response": {
+            "sender": 2,
+            "message": "10 days from payment. We can create an escrow deal to protect both of us.",
+            "delay": 1800
+          }
+        }
+      ]
+    }
+  ],
+  "defaultResponses": [
+    {
+      "trigger": "default",
+      "responses": [
+        "I'm interested in discussing this further.",
+        "Let me check and get back to you.",
+        "That sounds reasonable to me.",
+        "Can we proceed with escrow?",
+        "Thank you for the quick response!"
+      ]
+    }
+  ]
+}

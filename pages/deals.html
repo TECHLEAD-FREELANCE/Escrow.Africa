@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Deals - Paybill Escrow</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/deals.css">
+</head>
+<body class="deals-page">
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="dashboard.html" class="back-btn"><img src="../assets/back.png" alt="Back"></a>
+                <h3>My Deals</h3>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <div class="tabs-container">
+            <div class="tabs">
+                <button class="tab active" data-tab="active">Active</button>
+                <button class="tab" data-tab="completed">Completed</button>
+                <button class="tab" data-tab="all">All</button>
+            </div>
+        </div>
+
+        <div class="deals-list" id="dealsContainer">
+            <!-- Deals loaded by JavaScript -->
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="deals.html" class="nav-item active">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Deals</span>
+        </a>
+        <a href="deal-create.html" class="nav-item nav-item-create">
+            <span class="nav-icon-plus">➕</span>
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">Chat</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span class="nav-label">Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/deals.js"></script>
+</body>
+</html>

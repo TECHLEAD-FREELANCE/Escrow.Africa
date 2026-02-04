@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Data Test - Escrow.Africa</title>
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; background: #f5f5f5; }
+        .test-section { background: white; padding: 20px; margin-bottom: 20px; border-radius: 8px; }
+        .success { color: green; }
+        .error { color: red; }
+        pre { background: #f9f9f9; padding: 10px; border-radius: 4px; overflow-x: auto; }
+    </style>
+</head>
+<body>
+    <h1>Escrow.Africa Data Test</h1>
+    
+    <div class="test-section">
+        <h2>Users Data</h2>
+        <div id="users-status">Loading...</div>
+        <pre id="users-data"></pre>
+    </div>
+    
+    <div class="test-section">
+        <h2>Deals Data</h2>
+        <div id="deals-status">Loading...</div>
+        <pre id="deals-data"></pre>
+    </div>
+    
+    <div class="test-section">
+        <h2>Transactions Data</h2>
+        <div id="transactions-status">Loading...</div>
+        <pre id="transactions-data"></pre>
+    </div>
+    
+    <div class="test-section">
+        <h2>Notifications Data</h2>
+        <div id="notifications-status">Loading...</div>
+        <pre id="notifications-data"></pre>
+    </div>
+    
+    <div class="test-section">
+        <h2>Chat Scripts Data</h2>
+        <div id="chat-status">Loading...</div>
+        <pre id="chat-data"></pre>
+    </div>
+
+    <script>
+        async function testDataFile(filename, statusId, dataId) {
+            try {
+                const response = await fetch(`data/${filename}`);
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}`);
+                }
+                const data = await response.json();
+                
+                // Normalize data to array
+                let arrayData;
+                if (Array.isArray(data)) {
+                    arrayData = data;
+                } else if (data.users) {
+                    arrayData = data.users;
+                } else if (data.deals) {
+                    arrayData = data.deals;
+                } else if (data.transactions) {
+                    arrayData = data.transactions;
+                } else if (data.notifications) {
+                    arrayData = data.notifications;
+                } else if (data.chatScripts) {
+                    arrayData = data.chatScripts;
+                } else {
+                    arrayData = data;
+                }
+                
+                document.getElementById(statusId).innerHTML = 
+                    `<span class="success">✓ Loaded successfully (${Array.isArray(arrayData) ? arrayData.length : 'N/A'} items)</span>`;
+                document.getElementById(dataId).textContent = JSON.stringify(data, null, 2);
+            } catch (error) {
+                document.getElementById(statusId).innerHTML = 
+                    `<span class="error">✗ Error: ${error.message}</span>`;
+                document.getElementById(dataId).textContent = error.stack;
+            }
+        }
+
+        // Test all data files
+        testDataFile('users.json', 'users-status', 'users-data');
+        testDataFile('deals.json', 'deals-status', 'deals-data');
+        testDataFile('transactions.json', 'transactions-status', 'transactions-data');
+        testDataFile('notifications.json', 'notifications-status', 'notifications-data');
+        testDataFile('chat-scripts.json', 'chat-status', 'chat-data');
+    </script>
+</body>
+</html>

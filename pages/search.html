@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Users - Paybill Escrow</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="search-page">
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="dashboard.html" class="back-btn"><img src="../assets/back.png" alt="Back"></a>
+                <h3>Search Users</h3>
+            </div>
+        </div>
+    </header>
+
+    <div class="search-section" style="padding: 16px; background: white;">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search by username..." id="searchInput" style="cursor: text; background: white;" autofocus>
+        </div>
+    </div>
+
+    <div class="page-container">
+        <div id="searchResults">
+            <div class="empty-state" style="padding: 40px; text-align: center;">
+                <p style="font-size: 48px; margin-bottom: 16px;">👥</p>
+                <h3>Search for Users</h3>
+                <p style="color: var(--text-secondary); margin-top: 8px;">Enter a username to find other users</p>
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="deals.html" class="nav-item">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Deals</span>
+        </a>
+        <a href="deal-create.html" class="nav-item nav-item-create">
+            <span class="nav-icon-plus">➕</span>
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">Chat</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span class="nav-label">Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/search.js"></script>
+</body>
+</html>

@@ -1,0 +1,79 @@
+{
+  "users": [
+    {
+      "id": 1,
+      "username": "buyer1",
+      "password": "demo123",
+      "fullName": "John Kamau",
+      "email": "john.kamau@email.com",
+      "phone": "+254712345678",
+      "userType": "buyer",
+      "avatar": "SY",
+      "walletBalance": 15000,
+      "rating": 4.8,
+      "completedDeals": 23,
+      "joinedDate": "2025-08-15",
+      "verified": true
+    },
+    {
+      "id": 2,
+      "username": "seller1",
+      "password": "demo123",
+      "fullName": "Sarah Mburu",
+      "email": "sarah.mburu@email.com",
+      "phone": "+254723456789",
+      "userType": "seller",
+      "avatar": "SM",
+      "walletBalance": 45000,
+      "rating": 4.9,
+      "completedDeals": 67,
+      "joinedDate": "2025-03-22",
+      "verified": true
+    },
+    {
+      "id": 3,
+      "username": "buyer2",
+      "password": "demo123",
+      "fullName": "David Ochieng",
+      "email": "david.ochieng@email.com",
+      "phone": "+254734567890",
+      "userType": "buyer",
+      "avatar": "DO",
+      "walletBalance": 8500,
+      "rating": 4.5,
+      "completedDeals": 12,
+      "joinedDate": "2025-11-10",
+      "verified": true
+    },
+    {
+      "id": 4,
+      "username": "seller2",
+      "password": "demo123",
+      "fullName": "Grace Wanjiku",
+      "email": "grace.wanjiku@email.com",
+      "phone": "+254745678901",
+      "userType": "seller",
+      "avatar": "GW",
+      "walletBalance": 32000,
+      "rating": 4.7,
+      "completedDeals": 45,
+      "joinedDate": "2025-06-05",
+      "verified": true
+    },
+    {
+      "id": 5,
+      "username": "trader1",
+      "password": "demo123",
+      "fullName": "Peter Mutua",
+      "email": "peter.mutua@email.com",
+      "phone": "+254756789012",
+      "userType": "both",
+      "avatar": "PM",
+      "walletBalance": 22000,
+      "rating": 4.6,
+      "completedDeals": 34,
+      "joinedDate": "2025-07-18",
+      "verified": true
+    }
+  ]
+}

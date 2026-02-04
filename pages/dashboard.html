@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - Paybill Escrow</title>
+    <link rel="stylesheet" href="../css/styles.css">
+</head>
+<body class="dashboard-page">
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <!-- <button class="menu-btn" id="menuBtn">
+                    <span class="menu-icon"></span>
+                </button> -->
+                <div class="app-title">
+                    <!-- <span class="logo-icon">📋</span> -->
+                    <span>Paybill Escrow</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="notification-btn" id="notificationBtn">
+                    <span class="notification-icon">🔔</span>
+                    <span class="notification-badge">3</span>
+                </button>
+                <div class="user-avatar" id="userAvatar">SY</div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <div class="search-section">
+        <div class="search-container">
+            <span class="search-icon">🔍</span>
+            <input type="text" placeholder="Search username..." id="searchInput">
+        </div>
+    </div>
+
+    <!-- Quick Services -->
+    <div class="main-content">
+        <section class="quick-services">
+            <h2 class="section-title">Quick Services</h2>
+            <div class="services-grid">
+                <a href="deal-create.html" class="service-card">
+                    <div class="service-icon">
+                        <img src="../assets/create_deal.png" alt="Create Deal">
+                    </div>
+                    <span class="service-name">Create Deal</span>
+                </a>
+
+                <a href="chat.html" class="service-card">
+                    <div class="service-icon">
+                        <img src="../assets/escrow_chat.png" alt="Escrow Chat">
+                    </div>
+                    <span class="service-name">Escrow Chat</span>
+                </a>
+
+                <a href="withdraw.html" class="service-card">
+                    <div class="service-icon">
+                        <img src="../assets/withdrawal.png" alt="Withdraw">
+                    </div>
+                    <span class="service-name">Withdraw</span>
+                </a>
+
+                <a href="search.html" class="service-card">
+                    <div class="service-icon">
+                        <img src="../assets/search_user.png" alt="Search User">
+                    </div>
+                    <span class="service-name">Search User</span>
+                </a>
+
+                <a href="deals.html" class="service-card">
+                    <div class="service-icon">
+                        <img src="../assets/active_deals.png" alt="Active Deals">
+                    </div>
+                    <span class="service-name">Active Deals</span>
+                </a>
+
+                <a href="disputes.html" class="service-card">
+                    <div class="service-icon">
+                        <img src="../assets/dispputes.png" alt="Disputes">
+                    </div>
+                    <span class="service-name">Disputes</span>
+                </a>
+
+                <a href="wallet.html" class="service-card">
+                    <div class="service-icon">
+                        <img src="../assets/wallet_balance.png" alt="Wallet Balance">
+                    </div>
+                    <span class="service-name">Wallet Balance</span>
+                </a>
+
+                <a href="history.html" class="service-card">
+                    <div class="service-icon">
+                        <img src="../assets/history.png" alt="History">
+                    </div>
+                    <span class="service-name">History</span>
+                </a>
+            </div>
+        </section>
+
+        <!-- Recent Activity Section -->
+        <section class="recent-activity">
+            <div class="section-header">
+                <h2 class="section-title">Recent Activity</h2>
+                <a href="history.html" class="view-all-link">View All</a>
+            </div>
+            <div id="recentActivityContainer" class="activity-list">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </section>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item active">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="deals.html" class="nav-item">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Deals</span>
+        </a>
+        <a href="deal-create.html" class="nav-item nav-item-create">
+            <span class="nav-icon-plus">➕</span>
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">Chat</span>
+            <span class="chat-badge">2</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span class="nav-label">Profile</span>
+        </a>
+    </nav>
+
+    <!-- Share Deal Link (Fixed Button) -->
+    <div class="share-link-container" id="shareLinkContainer" style="display: none;">
+        <div class="share-content">
+            <p>Share deal link:</p>
+            <div class="share-buttons">
+                <button class="share-btn whatsapp-btn">
+                    <span>📱</span> WhatsApp
+                </button>
+                <button class="share-btn telegram-btn">
+                    <span>✈️</span> Telegram
+                </button>
+                <button class="share-btn link-btn">
+                    <span>🔗</span> Copy Link
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/dashboard.js"></script>
+</body>
+</html>

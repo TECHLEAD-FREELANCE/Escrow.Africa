@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Wallet - Paybill Escrow</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/deals.css">
+</head>
+<body class="wallet-page">
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="dashboard.html" class="back-btn"><img src="../assets/back.png" alt="Back"></a>
+                <h3>Wallet</h3>
+            </div>
+        </div>
+    </header>
+
+    <div class="page-container">
+        <div class="wallet-balance-card">
+            <p style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">Available Balance</p>
+            <h2 id="walletBalance" style="font-size: 42px; font-weight: 700; margin-bottom: 24px;">KES 0</h2>
+            <div style="display: flex; gap: 12px;">
+                <a href="withdraw.html" class="btn-primary" style="flex: 1; text-align: center; background: white; color: var(--primary-color); text-decoration: none; padding: 12px;">
+                    Withdraw
+                </a>
+                <button class="btn-primary" style="flex: 1; background: rgba(255,255,255,0.2);">
+                    Top Up
+                </button>
+            </div>
+        </div>
+
+        <div style="background: white; padding: 20px; border-radius: 12px; margin-bottom: 16px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+                <h3 style="font-size: 18px; font-weight: 600;">Transaction History</h3>
+                <select id="filterType" style="padding: 6px 12px; border: 1px solid var(--border-color); border-radius: 6px; font-size: 14px;">
+                    <option value="all">All</option>
+                    <option value="payment">Payments</option>
+                    <option value="withdrawal">Withdrawals</option>
+                    <option value="deposit">Deposits</option>
+                </select>
+            </div>
+            <div id="transactionsContainer">
+                <!-- Transactions loaded by JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="deals.html" class="nav-item">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Deals</span>
+        </a>
+        <a href="deal-create.html" class="nav-item nav-item-create">
+            <span class="nav-icon-plus">➕</span>
+        </a>
+        <a href="chat.html" class="nav-item">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">Chat</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span class="nav-label">Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/wallet.js"></script>
+</body>
+</html>

@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat - Paybill Escrow</title>
+    <link rel="stylesheet" href="../css/styles.css">
+    <link rel="stylesheet" href="../css/chat.css">
+</head>
+<body class="chat-page">
+    <!-- Header -->
+    <header class="app-header">
+        <div class="header-content">
+            <div class="header-left">
+                <a href="dashboard.html" class="back-btn"><img src="../assets/back.png" alt="Back"></a>
+                <div class="chat-header-info" id="chatHeaderInfo">
+                    <h3>Escrow Chat</h3>
+                    <p>Select a conversation</p>
+                </div>
+            </div>
+            <div class="header-right">
+                <button class="more-btn" id="moreBtn">⋮</button>
+            </div>
+        </div>
+    </header>
+
+    <div class="chat-container">
+        <!-- Chat List (Left Panel on Desktop) -->
+        <aside class="chat-list" id="chatList">
+            <div class="chat-list-header">
+                <h2>Messages</h2>
+                <button class="new-chat-btn" id="newChatBtn">✏️</button>
+            </div>
+            <div class="chat-search">
+                <input type="text" placeholder="Search conversations..." id="chatSearchInput">
+            </div>
+            <div class="chat-list-items" id="chatListItems">
+                <!-- Populated by JavaScript -->
+            </div>
+        </aside>
+
+        <!-- Chat Messages (Right Panel) -->
+        <main class="chat-main" id="chatMain">
+            <div class="chat-empty-state">
+                <div class="empty-icon">💬</div>
+                <h3>Select a chat to start messaging</h3>
+                <p>Choose from your existing conversations or start a new one</p>
+            </div>
+
+            <div class="chat-messages-container" id="chatMessagesContainer" style="display: none;">
+                <div class="chat-messages" id="chatMessages">
+                    <!-- Messages populated by JavaScript -->
+                </div>
+
+                <div class="chat-input-container">
+                    <button class="attach-btn" id="attachBtn">📎</button>
+                    <input 
+                        type="text" 
+                        placeholder="Type a message..." 
+                        id="messageInput"
+                        class="message-input"
+                    >
+                    <button class="send-btn" id="sendBtn">
+                        <span>➤</span>
+                    </button>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Create Deal Modal -->
+    <div class="modal" id="createDealModal" style="display: none;">
+        <div class="modal-overlay"></div>
+        <div class="modal-content deal-modal-content">
+            <div class="modal-header">
+                <h2>Create Escrow Deal</h2>
+                <button class="modal-close" id="closeDealModal">✕</button>
+            </div>
+            <form id="inChatDealForm" class="deal-form">
+                <div class="form-group">
+                    <label for="dealTitle">Deal Title *</label>
+                    <input type="text" id="dealTitle" placeholder="e.g., iPhone 15 Pro Max" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dealDescription">Description *</label>
+                    <textarea id="dealDescription" rows="4" placeholder="Describe what you're buying/selling..." required></textarea>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dealAmount">Amount (KES) *</label>
+                    <input type="number" id="dealAmount" placeholder="0" required>
+                    <small class="fee-info">Platform fee (2%): <span id="platformFeeDisplay">KES 0</span></small>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dealTimeline">Timeline *</label>
+                    <select id="dealTimeline" required>
+                        <option value="">Select timeline</option>
+                        <option value="1-day">1 Day</option>
+                        <option value="2-days">2 Days</option>
+                        <option value="3-days">3 Days</option>
+                        <option value="5-days">5 Days</option>
+                        <option value="7-days">7 Days</option>
+                        <option value="14-days">14 Days</option>
+                        <option value="30-days">30 Days</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="dealPhoto">Photo/Video (Optional)</label>
+                    <input type="file" id="dealPhoto" accept="image/*,video/*">
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn-secondary" id="cancelDealBtn">Cancel</button>
+                    <button type="submit" class="btn-primary">Create Deal</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Bottom Navigation -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="nav-item">
+            <span class="nav-icon">🏠</span>
+            <span class="nav-label">Home</span>
+        </a>
+        <a href="deals.html" class="nav-item">
+            <span class="nav-icon">📄</span>
+            <span class="nav-label">Deals</span>
+        </a>
+        <a href="deal-create.html" class="nav-item nav-item-create">
+            <span class="nav-icon-plus">➕</span>
+        </a>
+        <a href="chat.html" class="nav-item active">
+            <span class="nav-icon">💬</span>
+            <span class="nav-label">Chat</span>
+        </a>
+        <a href="profile.html" class="nav-item">
+            <span class="nav-icon">👤</span>
+            <span class="nav-label">Profile</span>
+        </a>
+    </nav>
+
+    <script src="../js/auth.js"></script>
+    <script src="../js/chat.js"></script>
+</body>
+</html>
