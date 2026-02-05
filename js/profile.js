@@ -43,28 +43,28 @@ class Profile {
         const isOwnProfile = this.viewingUser.id === this.currentUser.id;
 
         container.innerHTML = `
-            <div style="background: white; padding: 24px; border-radius: 12px; margin-bottom: 20px;">
-                <div style="text-align: center; margin-bottom: 24px;">
-                    <div style="width: 100px; height: 100px; border-radius: 50%; background: var(--primary-color); display: flex; align-items: center; justify-content: center; color: white; font-size: 48px; font-weight: 600; margin: 0 auto 16px;">
+            <div class="profile-card">
+                <div class="profile-header">
+                    <div class="profile-avatar">
                         ${this.viewingUser.fullName.charAt(0)}
                     </div>
-                    <h2 style="margin-bottom: 4px;">${this.viewingUser.fullName}</h2>
-                    <p style="color: var(--text-secondary); margin-bottom: 8px;">@${this.viewingUser.username}</p>
-                    ${this.viewingUser.verified ? '<span style="background: var(--success-light); color: var(--success-color); padding: 4px 12px; border-radius: 20px; font-size: 14px; font-weight: 500;">✓ Verified</span>' : ''}
+                    <h2 class="profile-name">${this.viewingUser.fullName}</h2>
+                    <p class="profile-username">@${this.viewingUser.username}</p>
+                    ${this.viewingUser.verified ? '<span class="verified-badge">✓ Verified</span>' : ''}
                 </div>
 
-                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-bottom: 24px;">
-                    <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: 700; color: var(--accent-color); margin-bottom: 4px;">⭐ ${this.viewingUser.rating}</div>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Rating</div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-value rating">⭐ ${this.viewingUser.rating || 'undefined'}</div>
+                        <div class="stat-label">Rating</div>
                     </div>
-                    <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: 700; color: var(--primary-color); margin-bottom: 4px;">${this.viewingUser.completedDeals}</div>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Deals</div>
+                    <div class="stat-item">
+                        <div class="stat-value deals">${this.viewingUser.completedDeals || 'undefined'}</div>
+                        <div class="stat-label">Deals</div>
                     </div>
-                    <div style="background: var(--bg-secondary); padding: 16px; border-radius: 8px; text-align: center;">
-                        <div style="font-size: 24px; font-weight: 700; color: var(--success-color); margin-bottom: 4px;">2y</div>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Member</div>
+                    <div class="stat-item">
+                        <div class="stat-value member">2y</div>
+                        <div class="stat-label">Member</div>
                     </div>
                 </div>
 
@@ -77,65 +77,65 @@ class Profile {
 
     renderOwnProfile() {
         return `
-            <div class="form-section" style="margin-bottom: 20px;">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 16px;">
+            <div class="profile-section">
+                <div class="section-header">
                     <h3>Personal Information</h3>
-                    <button class="btn-secondary" id="editBtn" style="padding: 8px 16px; font-size: 14px;">
+                    <button class="btn-edit" id="editBtn">
                         ${this.isEditMode ? 'Cancel' : '✏️ Edit'}
                     </button>
                 </div>
 
-                <div style="margin-bottom: 16px;">
+                <div class="form-group">
                     <label class="form-label">Full Name</label>
                     <input type="text" id="fullName" class="form-input" value="${this.viewingUser.fullName}" ${this.isEditMode ? '' : 'disabled'}>
                 </div>
 
-                <div style="margin-bottom: 16px;">
+                <div class="form-group">
                     <label class="form-label">Email</label>
                     <input type="email" id="email" class="form-input" value="${this.viewingUser.email || 'john.kamau@example.com'}" ${this.isEditMode ? '' : 'disabled'}>
                 </div>
 
-                <div style="margin-bottom: 16px;">
+                <div class="form-group">
                     <label class="form-label">Phone Number</label>
                     <input type="tel" id="phone" class="form-input" value="${this.viewingUser.phone || '+254712345678'}" ${this.isEditMode ? '' : 'disabled'}>
                 </div>
 
                 ${this.isEditMode ? `
-                    <button class="btn-primary" style="width: 100%;" onclick="profile.saveProfile()">
+                    <button class="btn-primary" style="width: 100%; margin-top: 16px;" onclick="profile.saveProfile()">
                         Save Changes
                     </button>
                 ` : ''}
             </div>
 
-            <div class="form-section" style="margin-bottom: 20px;">
+            <div class="profile-section">
                 <h3 style="margin-bottom: 16px;">Settings</h3>
                 
-                <button class="setting-item" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg-secondary); border: none; border-radius: 8px; margin-bottom: 12px; cursor: pointer; text-align: left;">
-                    <div>
-                        <div style="font-weight: 600; margin-bottom: 4px;">🔒 Change Password</div>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Update your password</div>
+                <button class="setting-item">
+                    <div class="setting-content">
+                        <div class="setting-title">🔒 Change Password</div>
+                        <div class="setting-desc">Update your password</div>
                     </div>
-                    <span>›</span>
+                    <span class="setting-arrow">›</span>
                 </button>
 
-                <button class="setting-item" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg-secondary); border: none; border-radius: 8px; margin-bottom: 12px; cursor: pointer; text-align: left;">
-                    <div>
-                        <div style="font-weight: 600; margin-bottom: 4px;">🔔 Notifications</div>
-                        <div style="font-size: 13px; color: var(--text-secondary);">Manage notification preferences</div>
+                <button class="setting-item">
+                    <div class="setting-content">
+                        <div class="setting-title">🔔 Notifications</div>
+                        <div class="setting-desc">Manage notification preferences</div>
                     </div>
-                    <span>›</span>
+                    <span class="setting-arrow">›</span>
                 </button>
 
-                <button class="setting-item" style="width: 100%; display: flex; justify-content: space-between; align-items: center; padding: 16px; background: var(--bg-secondary); border: none; border-radius: 8px; margin-bottom: 12px; cursor: pointer; text-align: left;">
-                    <div>
-                        <div style="font-weight: 600; margin-bottom: 4px;">🌐 Language</div>
-                        <div style="font-size: 13px; color: var(--text-secondary);">English</div>
+                <button class="setting-item">
+                    <div class="setting-content">
+                        <div class="setting-title">🌐 Language</div>
+                        <div class="setting-desc">English</div>
                     </div>
-                    <span>›</span>
+                    <span class="setting-arrow">›</span>
                 </button>
             </div>
 
-            <button class="btn-secondary" style="width: 100%; background: var(--error-light); color: var(--error-color); border: none;" onclick="profile.logout()">
+            <button class="btn-logout" onclick="profile.logout()">
                 🚪 Logout
             </button>
         `;

@@ -351,9 +351,26 @@ class DealDetail {
 
     raiseDispute() {
         if (confirm('Are you sure you want to raise a dispute? Our support team will review this case.')) {
+            // Update deal status
+            this.deal.status = 'disputed';
+            
+            // Save to localStorage
+            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            const dealIndex = localDeals.findIndex(d => 
+                (d.id === this.deal.id || d.dealId === this.deal.dealId)
+            );
+            
+            if (dealIndex !== -1) {
+                localDeals[dealIndex].status = 'disputed';
+            } else {
+                // If not in localStorage yet, add it
+                localDeals.unshift(this.deal);
+            }
+            
+            localStorage.setItem('userDeals', JSON.stringify(localDeals));
+            
             this.showToast('Dispute raised. Support team notified.', 'error');
             setTimeout(() => {
-                this.deal.status = 'disputed';
                 window.location.href = 'disputes.html';
             }, 1500);
         }

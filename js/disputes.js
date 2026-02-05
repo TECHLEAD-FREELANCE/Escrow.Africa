@@ -20,14 +20,20 @@ class Disputes {
                 fetch('../data/users.json')
             ]);
 
-            const allDeals = await dealsResponse.json();
-            this.users = await usersResponse.json();
+            const dealsData = await dealsResponse.json();
+            const usersData = await usersResponse.json();
 
-            // Ensure allDeals is an array
-            const dealsArray = Array.isArray(allDeals) ? allDeals : [];
+            // Handle both array and object formats
+            let allDeals = Array.isArray(dealsData) ? dealsData : (dealsData.deals || []);
+            const usersArray = Array.isArray(usersData) ? usersData : (usersData.users || []);
+            this.users = usersArray;
+
+            // Load deals from localStorage and merge
+            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            allDeals = [...localDeals, ...allDeals];
             
             // Filter disputed deals where current user is involved
-            this.disputes = dealsArray.filter(deal => 
+            this.disputes = allDeals.filter(deal => 
                 deal.status === 'disputed' && 
                 (deal.buyerId === this.currentUser.id || deal.sellerId === this.currentUser.id)
             );

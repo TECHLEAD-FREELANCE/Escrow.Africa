@@ -3,27 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Profile - Paybill Escrow</title>
+    <title>Top Up - Paybill Escrow</title>
     <link rel="stylesheet" href="../css/styles.css">
     <link rel="stylesheet" href="../css/deals.css">
 </head>
-<body class="profile-page">
+<body class="topup-page">
     <header class="app-header">
         <div class="header-content">
             <div class="header-left">
-                <a href="dashboard.html" class="back-btn"><img src="../assets/back.png" alt="Back"></a>
-                <h3>My Profile</h3>
-            </div>
-            <div class="header-right">
-                <button class="more-btn" id="moreBtn">⋮</button>
+                <a href="wallet.html" class="back-btn"><img src="../assets/back.png" alt="Back"></a>
+                <h3>Top Up Wallet</h3>
             </div>
         </div>
     </header>
 
-    <div class="page-container">
-        <div id="profileContainer">
-            <!--  Profile loaded by JavaScript -->
-        </div>
+    <div class="page-container" id="topupContainer">
+        <!-- Top up content loaded by JavaScript -->
     </div>
 
     <nav class="bottom-nav">
@@ -42,13 +37,13 @@
             <span class="nav-icon">💬</span>
             <span class="nav-label">Chat</span>
         </a>
-        <a href="profile.html" class="nav-item active">
+        <a href="profile.html" class="nav-item">
             <span class="nav-icon">👤</span>
             <span class="nav-label">Profile</span>
         </a>
     </nav>
 
     <script src="../js/auth.js"></script>
-    <script src="../js/profile.js"></script>
+    <script src="../js/topup.js"></script>
 </body>
 </html>

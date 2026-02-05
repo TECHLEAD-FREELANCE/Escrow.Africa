@@ -687,6 +687,140 @@
 @media (max-width: 767px) {
     .chat-main {
         position: absolute;
+    }
+}
+
+/* Bottom Sheet for Attachments */
+.bottom-sheet {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 9999;
+    display: flex;
+    align-items: flex-end;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.bottom-sheet.show {
+    opacity: 1;
+    pointer-events: all;
+}
+
+.sheet-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
+}
+
+.sheet-content {
+    position: relative;
+    width: 100%;
+    background: white;
+    border-radius: 24px 24px 0 0;
+    padding: 24px;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.bottom-sheet.show .sheet-content {
+    transform: translateY(0);
+}
+
+.sheet-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 2px solid var(--bg-secondary);
+}
+
+.sheet-header h3 {
+    font-size: 20px;
+    font-weight: 700;
+    color: var(--text-primary);
+}
+
+.sheet-close {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: var(--bg-secondary);
+    border: none;
+    font-size: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.3s ease;
+}
+
+.sheet-close:hover {
+    background: var(--error-light);
+    color: var(--error-color);
+    transform: rotate(90deg);
+}
+
+.sheet-options {
+    display: grid;
+    gap: 12px;
+}
+
+.sheet-option {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--bg-secondary);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: left;
+}
+
+.sheet-option:hover {
+    background: var(--primary-color);
+    transform: translateX(8px);
+}
+
+.sheet-option:hover .option-icon {
+    transform: scale(1.2);
+}
+
+.sheet-option:hover .option-label {
+    color: white;
+}
+
+.option-icon {
+    width: 48px;
+    height: 48px;
+    border-radius: 12px;
+    background: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    transition: transform 0.3s ease;
+}
+
+.option-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--text-primary);
+    transition: color 0.3s ease;
+}
+
         top: 0;
         left: 0;
         right: 0;
