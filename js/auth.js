@@ -18,10 +18,15 @@ class Auth {
             const data = await response.json();
             // Handle both array and object with users property
             this.users = Array.isArray(data) ? data : (data.users || []);
+            
+            // Load registered users from localStorage
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            this.users = [...this.users, ...registeredUsers];
         } catch (error) {
             console.error('Error loading users:', error);
-            // Fallback demo user
-            this.users = [
+            // Load only from localStorage if JSON fails
+            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            this.users = registeredUsers.length > 0 ? registeredUsers : [
                 { username: 'demo', password: 'demo123', fullName: 'Demo User', id: 1 }
             ];
         }
@@ -30,14 +35,16 @@ class Auth {
     checkSession() {
         const currentPath = window.location.pathname;
         const isLoginPage = currentPath.endsWith('index.html') || currentPath.endsWith('/');
+        const isInvitePage = currentPath.includes('deal-invite.html');
         
         const sessionUser = sessionStorage.getItem('currentUser');
         
         if (sessionUser && isLoginPage) {
             // Redirect to dashboard if already logged in
             window.location.href = 'pages/dashboard.html';
-        } else if (!sessionUser && !isLoginPage) {
+        } else if (!sessionUser && !isLoginPage && !isInvitePage) {
             // Redirect to login if not logged in and trying to access protected pages
+            // BUT allow access to deal-invite page
             window.location.href = '../index.html';
         }
     }
@@ -124,9 +131,20 @@ class Auth {
         }, 3000);
     }
 
-    static getCurrentUser() {
+    static getCurrentUser(redirect = true) {
         const userSession = sessionStorage.getItem('currentUser');
-        return userSession ? JSON.parse(userSession) : null;
+        const user = userSession ? JSON.parse(userSession) : null;
+        
+        if (!user && redirect) {
+            // Only redirect if redirect parameter is true
+            const currentPath = window.location.pathname;
+            const isInvitePage = currentPath.includes('deal-invite.html');
+            if (!isInvitePage) {
+                window.location.href = '../index.html';
+            }
+        }
+        
+        return user;
     }
 
     static logout() {

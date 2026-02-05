@@ -1011,3 +1011,15 @@ textarea.form-input {
     transform: translateY(-2px);
     box-shadow: 0 4px 8px rgba(220, 38, 38, 0.2);
 }
+
+/* Animations */
+@keyframes scaleIn {
+    from {
+        transform: scale(0);
+        opacity: 0;
+    }
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}

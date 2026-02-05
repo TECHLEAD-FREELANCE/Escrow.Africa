@@ -166,8 +166,45 @@ class DealCreate {
     }
 
     generateShareLink() {
-        const dealId = 'ESC' + Math.floor(Math.random() * 10000);
-        const link = `${window.location.origin}/pages/deal-detail.html?id=${dealId}`;
+        const title = document.getElementById('title').value;
+        const description = document.getElementById('description').value;
+        const amount = document.getElementById('amount').value;
+        const timeline = document.getElementById('timeline').value;
+        const category = document.getElementById('category').value;
+
+        if (!title || !description || !amount || !timeline) {
+            alert('Please fill all required fields (Title, Description, Amount, Timeline)');
+            return;
+        }
+
+        // Create deal object for invitation
+        const dealId = 'ESC' + String(Date.now()).slice(-6);
+        const newDeal = {
+            dealId: dealId,
+            title: title,
+            description: description,
+            amount: parseFloat(amount),
+            platformFee: parseFloat(amount) * 0.02,
+            totalAmount: parseFloat(amount) * 1.02,
+            timeline: timeline + ' days',
+            deadline: new Date(Date.now() + parseInt(timeline) * 24 * 60 * 60 * 1000).toISOString().split('T')[0],
+            buyerId: this.currentUser.id,
+            sellerId: null, // Will be set when invitee joins
+            buyerName: this.currentUser.fullName,
+            sellerName: 'Pending',
+            status: 'pending-acceptance',
+            createdDate: new Date().toISOString().split('T')[0],
+            category: category || 'General'
+        };
+
+        // Save deal to localStorage
+        const existingDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+        existingDeals.unshift(newDeal);
+        localStorage.setItem('userDeals', JSON.stringify(existingDeals));
+
+        // Encode deal data in URL for cross-session sharing
+        const dealData = btoa(JSON.stringify(newDeal));
+        const link = `${window.location.origin}/pages/deal-invite.html?data=${dealData}`;
 
         // Create share sheet
         const sheet = document.createElement('div');
@@ -176,25 +213,29 @@ class DealCreate {
             <div class="sheet-overlay"></div>
             <div class="sheet-content">
                 <div class="sheet-header">
-                    <h3>Share Deal Link</h3>
+                    <h3>Share Deal Invitation</h3>
                     <button class="sheet-close">✕</button>
                 </div>
                 <div class="sheet-options">
-                    <div style="padding: 16px; background: var(--bg-tertiary); border-radius: 8px; margin-bottom: 16px;">
-                        <small style="display: block; margin-bottom: 8px; color: var(--text-secondary);">Deal Link:</small>
-                        <code style="font-size: 12px; word-break: break-all;">${link}</code>
+                    <div style="padding: 16px; background: #e0f2f1; border-radius: 8px; margin-bottom: 16px; border-left: 4px solid var(--primary-color);">
+                        <p style="font-size: 14px; margin-bottom: 8px; color: var(--text-primary); font-weight: 600;">🔗 Deal Created Successfully!</p>
+                        <p style="font-size: 13px; color: var(--text-secondary); line-height: 1.4;">Share this link with someone not on the platform. They'll be able to sign up and join this deal.</p>
                     </div>
-                    <button class="sheet-option" onclick="navigator.clipboard.writeText('${link}'); alert('Link copied!')">
+                    <div style="padding: 16px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 16px;">
+                        <small style="display: block; margin-bottom: 8px; color: var(--text-secondary); font-weight: 600;">Invitation Link:</small>
+                        <code id="inviteLink" style="font-size: 11px; word-break: break-all; display: block; padding: 8px; background: white; border-radius: 6px;">${link}</code>
+                    </div>
+                    <button class="sheet-option" onclick="navigator.clipboard.writeText(document.getElementById('inviteLink').textContent); alert('Invitation link copied! Share it with the other party.')">
                         <span class="option-icon">📋</span>
-                        <span class="option-label">Copy Link</span>
+                        <span class="option-label">Copy Invitation Link</span>
                     </button>
-                    <button class="sheet-option" onclick="window.open('https://wa.me/?text=${encodeURIComponent(link)}', '_blank')">
+                    <button class="sheet-option" onclick="window.open('https://wa.me/?text=${encodeURIComponent('Join me in this secure escrow deal on Escrow Africa: ')}' + encodeURIComponent(document.getElementById('inviteLink').textContent), '_blank')">
                         <span class="option-icon">📱</span>
                         <span class="option-label">Share on WhatsApp</span>
                     </button>
-                    <button class="sheet-option">
-                        <span class="option-icon">✉️</span>
-                        <span class="option-label">Share via Email</span>
+                    <button class="sheet-option" onclick="window.location.href='deal-detail.html?id=${dealId}'">
+                        <span class="option-icon">📄</span>
+                        <span class="option-label">View Deal Details</span>
                     </button>
                 </div>
             </div>
@@ -219,12 +260,18 @@ class DealCreate {
         const timeline = document.getElementById('timeline').value;
         const category = document.getElementById('category').value;
 
-        if (!title || !description || !amount || !timeline || !this.selectedUserId) {
-            alert('Please fill all required fields and select a user');
+        if (!title || !description || !amount || !timeline) {
+            alert('Please fill all required fields (Title, Description, Amount, Timeline)');
             return;
         }
 
-        // Create deal object
+        // If no user selected, create shareable deal link for non-platform users
+        if (!this.selectedUserId) {
+            this.generateShareLink();
+            return;
+        }
+
+        // Create deal with selected platform user
         const newDeal = {
             dealId: 'ESC' + String(Date.now()).slice(-6),
             title: title,
