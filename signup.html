@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign Up - Escrow Africa</title>
+    <link rel="stylesheet" href="css/styles.css">
+</head>
+<body class="login-page">
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo-text">Escrow.Africa</div>
+            <p class="tagline">Secure Transactions, Built on Trust</p>
+        </div>
+
+        <div class="login-card">
+            <h2>Create Account</h2>
+            <p class="login-subtitle">Join our secure escrow platform</p>
+
+            <form id="signupForm" class="login-form">
+                <div class="form-group">
+                    <label for="fullName">Full Name</label>
+                    <input 
+                        type="text" 
+                        id="fullName" 
+                        name="fullName" 
+                        placeholder="Enter your full name" 
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="username">Username</label>
+                    <input 
+                        type="text" 
+                        id="username" 
+                        name="username" 
+                        placeholder="Choose a username" 
+                        required
+                        minlength="3"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input 
+                        type="email" 
+                        id="email" 
+                        name="email" 
+                        placeholder="Enter your email" 
+                        required
+                    >
+                    <button type="button" class="verify-btn" id="verifyEmailBtn" style="margin-top: 8px;">
+                        Verify Email
+                    </button>
+                    <div id="emailVerification" style="display: none; margin-top: 12px;">
+                        <p style="color: #10b981; font-size: 14px; margin-bottom: 8px;">✓ OTP sent to your email</p>
+                        <div class="otp-container">
+                            <input type="text" maxlength="1" class="otp-input" data-index="0">
+                            <input type="text" maxlength="1" class="otp-input" data-index="1">
+                            <input type="text" maxlength="1" class="otp-input" data-index="2">
+                            <input type="text" maxlength="1" class="otp-input" data-index="3">
+                        </div>
+                    </div>
+                    <div id="emailVerified" style="display: none; margin-top: 8px; padding: 8px; background: #d1fae5; border-radius: 6px; color: #065f46; font-size: 14px;">
+                        ✅ Email Verified
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">Phone Number</label>
+                    <input 
+                        type="tel" 
+                        id="phone" 
+                        name="phone" 
+                        placeholder="+254 712 345 678" 
+                        required
+                    >
+                    <button type="button" class="verify-btn" id="verifyPhoneBtn" style="margin-top: 8px;">
+                        Verify Phone
+                    </button>
+                    <div id="phoneVerification" style="display: none; margin-top: 12px;">
+                        <p style="color: #10b981; font-size: 14px; margin-bottom: 8px;">✓ OTP sent to your phone</p>
+                        <div class="otp-container">
+                            <input type="text" maxlength="1" class="otp-input" data-index="0">
+                            <input type="text" maxlength="1" class="otp-input" data-index="1">
+                            <input type="text" maxlength="1" class="otp-input" data-index="2">
+                            <input type="text" maxlength="1" class="otp-input" data-index="3">
+                        </div>
+                    </div>
+                    <div id="phoneVerified" style="display: none; margin-top: 8px; padding: 8px; background: #d1fae5; border-radius: 6px; color: #065f46; font-size: 14px;">
+                        ✅ Phone Verified
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input 
+                        type="password" 
+                        id="password" 
+                        name="password" 
+                        placeholder="Create a password" 
+                        required
+                        minlength="6"
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="confirmPassword">Confirm Password</label>
+                    <input 
+                        type="password" 
+                        id="confirmPassword" 
+                        name="confirmPassword" 
+                        placeholder="Confirm your password" 
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="btn-primary" id="signupBtn">
+                    <span class="btn-text">Create Account</span>
+                    <span class="btn-loader" style="display: none;">
+                        <span class="spinner"></span>
+                    </span>
+                </button>
+
+                <div id="errorMessage" class="error-message" style="display: none;"></div>
+                <div id="successMessage" class="success-message" style="display: none;"></div>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            <p>Already have an account? <a href="index.html" class="signup-link">Sign In</a></p>
+        </div>
+    </div>
+
+    <script src="js/signup.js"></script>
+</body>
+</html>

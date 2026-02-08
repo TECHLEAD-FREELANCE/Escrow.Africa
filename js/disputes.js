@@ -29,13 +29,19 @@ class Disputes {
             this.users = usersArray;
 
             // Load deals from localStorage and merge
-            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            let localDeals = [];
+            try {
+                localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            } catch (error) {
+                console.error('Error parsing userDeals:', error);
+                localStorage.removeItem('userDeals');
+            }
             allDeals = [...localDeals, ...allDeals];
             
             // Filter disputed deals where current user is involved
             this.disputes = allDeals.filter(deal => 
                 deal.status === 'disputed' && 
-                (deal.buyerId === this.currentUser.id || deal.sellerId === this.currentUser.id)
+                (deal.buyerId == this.currentUser.id || deal.sellerId == this.currentUser.id)
             );
 
             this.renderDisputes();
@@ -61,8 +67,8 @@ class Disputes {
         }
 
         container.innerHTML = this.disputes.map(dispute => {
-            const otherPartyId = dispute.buyerId === this.currentUser.id ? dispute.sellerId : dispute.buyerId;
-            const otherParty = this.users.find(u => u.id === otherPartyId);
+            const otherPartyId = dispute.buyerId == this.currentUser.id ? dispute.sellerId : dispute.buyerId;
+            const otherParty = this.users.find(u => u.id == otherPartyId);
 
             return `
                 <div style="background: white; padding: 20px; border-radius: 12px; margin-bottom: 16px; border-left: 4px solid var(--error-color);">

@@ -37,7 +37,13 @@ class DealDetail {
             this.users = usersArray;
             
             // Load deals from localStorage and merge
-            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            let localDeals = [];
+            try {
+                localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            } catch (error) {
+                console.error('Error parsing userDeals:', error);
+                localStorage.removeItem('userDeals');
+            }
             allDeals = [...localDeals, ...allDeals];
             
             this.deal = allDeals.find(d => (d.id === dealId || d.dealId === dealId));
@@ -55,9 +61,9 @@ class DealDetail {
 
     renderDeal() {
         const container = document.getElementById('dealContainer');
-        const otherPartyId = this.deal.buyerId === this.currentUser.id ? this.deal.sellerId : this.deal.buyerId;
-        const otherParty = this.users.find(u => u.id === otherPartyId);
-        const role = this.deal.buyerId === this.currentUser.id ? 'Buyer' : 'Seller';
+        const otherPartyId = this.deal.buyerId == this.currentUser.id ? this.deal.sellerId : this.deal.buyerId;
+        const otherParty = this.users.find(u => u.id == otherPartyId);
+        const role = this.deal.buyerId == this.currentUser.id ? 'Buyer' : 'Seller';
 
         container.innerHTML = `
             <div class="deal-header">
@@ -165,7 +171,7 @@ class DealDetail {
     }
 
     getActionButtons() {
-        const role = this.deal.buyerId === this.currentUser.id ? 'Buyer' : 'Seller';
+        const role = this.deal.buyerId == this.currentUser.id ? 'Buyer' : 'Seller';
 
         if (this.deal.status === 'pending-acceptance' && role === 'Seller') {
             return `
@@ -355,7 +361,13 @@ class DealDetail {
             this.deal.status = 'disputed';
             
             // Save to localStorage
-            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            let localDeals = [];
+            try {
+                localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            } catch (error) {
+                console.error('Error parsing userDeals:', error);
+                localStorage.removeItem('userDeals');
+            }
             const dealIndex = localDeals.findIndex(d => 
                 (d.id === this.deal.id || d.dealId === this.deal.dealId)
             );

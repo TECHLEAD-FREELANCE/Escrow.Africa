@@ -18,10 +18,30 @@ class DealCreate {
             const response = await fetch('../data/users.json');
             const data = await response.json();
             // Handle both array and object with users property
-            const usersArray = Array.isArray(data) ? data : (data.users || []);
-            this.users = usersArray.filter(u => u.id !== this.currentUser.id);
+            let usersArray = Array.isArray(data) ? data : (data.users || []);
+            
+            // Load registered users from localStorage
+            let registeredUsers = [];
+            try {
+                registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            } catch (error) {
+                console.error('Error parsing registeredUsers from localStorage:', error);
+                localStorage.removeItem('registeredUsers');
+            }
+            usersArray = [...usersArray, ...registeredUsers];
+            
+            this.users = usersArray.filter(u => u.id != this.currentUser.id); // Use != for loose comparison
         } catch (error) {
             console.error('Error loading users:', error);
+            // Load only from localStorage if JSON fails
+            let registeredUsers = [];
+            try {
+                registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            } catch (error) {
+                console.error('Error parsing registeredUsers from localStorage:', error);
+                localStorage.removeItem('registeredUsers');
+            }
+            this.users = registeredUsers.filter(u => u.id != this.currentUser.id);
         }
     }
 
@@ -198,7 +218,13 @@ class DealCreate {
         };
 
         // Save deal to localStorage
-        const existingDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+        let existingDeals = [];
+        try {
+            existingDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+        } catch (error) {
+            console.error('Error parsing userDeals, starting fresh:', error);
+            localStorage.removeItem('userDeals');
+        }
         existingDeals.unshift(newDeal);
         localStorage.setItem('userDeals', JSON.stringify(existingDeals));
 
@@ -291,7 +317,13 @@ class DealCreate {
         };
 
         // Save to localStorage
-        const existingDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+        let existingDeals = [];
+        try {
+            existingDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+        } catch (error) {
+            console.error('Error parsing userDeals, starting fresh:', error);
+            localStorage.removeItem('userDeals');
+        }
         existingDeals.unshift(newDeal);
         localStorage.setItem('userDeals', JSON.stringify(existingDeals));
 

@@ -20,12 +20,24 @@ class Auth {
             this.users = Array.isArray(data) ? data : (data.users || []);
             
             // Load registered users from localStorage
-            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            let registeredUsers = [];
+            try {
+                registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            } catch (error) {
+                console.error('Error parsing registeredUsers from localStorage:', error);
+                localStorage.removeItem('registeredUsers'); // Clear corrupted data
+            }
             this.users = [...this.users, ...registeredUsers];
         } catch (error) {
             console.error('Error loading users:', error);
             // Load only from localStorage if JSON fails
-            const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            let registeredUsers = [];
+            try {
+                registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+            } catch (error) {
+                console.error('Error parsing registeredUsers from localStorage:', error);
+                localStorage.removeItem('registeredUsers'); // Clear corrupted data
+            }
             this.users = registeredUsers.length > 0 ? registeredUsers : [
                 { username: 'demo', password: 'demo123', fullName: 'Demo User', id: 1 }
             ];
@@ -87,6 +99,8 @@ class Auth {
                 id: user.id,
                 username: user.username,
                 fullName: user.fullName,
+                email: user.email,
+                phone: user.phone,
                 avatar: user.avatar,
                 userType: user.userType,
                 walletBalance: user.walletBalance,

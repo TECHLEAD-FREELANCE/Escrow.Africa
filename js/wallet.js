@@ -24,7 +24,7 @@ class Wallet {
             
             // Filter transactions for current user
             this.transactions = transactionsArray.filter(t => 
-                t.userId === this.currentUser.id
+                t.userId == this.currentUser.id
             );
 
             this.renderWallet();

@@ -62,10 +62,6 @@ class Profile {
                         <div class="stat-value deals">${this.viewingUser.completedDeals || 'undefined'}</div>
                         <div class="stat-label">Deals</div>
                     </div>
-                    <div class="stat-item">
-                        <div class="stat-value member">2y</div>
-                        <div class="stat-label">Member</div>
-                    </div>
                 </div>
 
                 ${isOwnProfile ? this.renderOwnProfile() : this.renderOtherProfile()}
@@ -92,12 +88,12 @@ class Profile {
 
                 <div class="form-group">
                     <label class="form-label">Email</label>
-                    <input type="email" id="email" class="form-input" value="${this.viewingUser.email || 'john.kamau@example.com'}" ${this.isEditMode ? '' : 'disabled'}>
+                    <input type="email" id="email" class="form-input" value="${this.viewingUser.email || ''}" ${this.isEditMode ? '' : 'disabled'}>
                 </div>
 
                 <div class="form-group">
                     <label class="form-label">Phone Number</label>
-                    <input type="tel" id="phone" class="form-input" value="${this.viewingUser.phone || '+254712345678'}" ${this.isEditMode ? '' : 'disabled'}>
+                    <input type="tel" id="phone" class="form-input" value="${this.viewingUser.phone || ''}" ${this.isEditMode ? '' : 'disabled'}>
                 </div>
 
                 ${this.isEditMode ? `
@@ -174,10 +170,27 @@ class Profile {
             return;
         }
 
-        // Simulate saving
+        // Update current user data
         this.viewingUser.fullName = fullName;
         this.viewingUser.email = email;
         this.viewingUser.phone = phone;
+
+        // Update sessionStorage
+        const currentSession = JSON.parse(sessionStorage.getItem('currentUser'));
+        currentSession.fullName = fullName;
+        currentSession.email = email;
+        currentSession.phone = phone;
+        sessionStorage.setItem('currentUser', JSON.stringify(currentSession));
+
+        // Update localStorage registeredUsers
+        const registeredUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        const userIndex = registeredUsers.findIndex(u => u.id === this.viewingUser.id);
+        if (userIndex !== -1) {
+            registeredUsers[userIndex].fullName = fullName;
+            registeredUsers[userIndex].email = email;
+            registeredUsers[userIndex].phone = phone;
+            localStorage.setItem('registeredUsers', JSON.stringify(registeredUsers));
+        }
 
         this.showToast('Profile updated successfully', 'success');
         this.isEditMode = false;

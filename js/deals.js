@@ -31,12 +31,18 @@ class Deals {
             this.users = usersArray;
 
             // Load deals from localStorage and merge with JSON deals
-            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            let localDeals = [];
+            try {
+                localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            } catch (error) {
+                console.error('Error parsing userDeals from localStorage:', error);
+                localStorage.removeItem('userDeals'); // Clear corrupted data
+            }
             allDeals = [...localDeals, ...allDeals];
 
-            // Filter deals where current user is involved
+            // Filter deals where current user is involved (use loose equality to handle type mismatches)
             this.deals = allDeals.filter(deal => 
-                deal.buyerId === this.currentUser.id || deal.sellerId === this.currentUser.id
+                deal.buyerId == this.currentUser.id || deal.sellerId == this.currentUser.id
             );
 
             this.renderDeals();
@@ -84,9 +90,9 @@ class Deals {
 
         container.innerHTML = filteredDeals.map(deal => {
             const dealId = deal.id || deal.dealId;
-            const otherPartyId = deal.buyerId === this.currentUser.id ? deal.sellerId : deal.buyerId;
-            const otherParty = this.users.find(u => u.id === otherPartyId);
-            const role = deal.buyerId === this.currentUser.id ? 'Buyer' : 'Seller';
+            const otherPartyId = deal.buyerId == this.currentUser.id ? deal.sellerId : deal.buyerId;
+            const otherParty = this.users.find(u => u.id == otherPartyId); // Use loose equality
+            const role = deal.buyerId == this.currentUser.id ? 'Buyer' : 'Seller';
 
             return `
                 <a href="deal-detail.html?id=${dealId}" class="deal-card" style="display: block; text-decoration: none; color: inherit; background: white; padding: 16px; border-radius: 12px; margin-bottom: 12px; box-shadow: 0 1px 3px rgba(0,0,0,0.1);">

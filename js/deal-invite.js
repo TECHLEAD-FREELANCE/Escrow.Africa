@@ -37,7 +37,13 @@ class DealInvite {
         if (currentUser) {
             // User already logged in, redirect to deal detail
             // But first save the deal to their localStorage
-            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            let localDeals = [];
+            try {
+                localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            } catch (error) {
+                console.error('Error parsing userDeals:', error);
+                localStorage.removeItem('userDeals');
+            }
             const exists = localDeals.find(d => d.dealId === this.deal.dealId);
             if (!exists) {
                 localDeals.unshift(this.deal);
@@ -52,7 +58,13 @@ class DealInvite {
     async loadDeal() {
         try {
             // Load from localStorage first (newly created deals)
-            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            let localDeals = [];
+            try {
+                localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            } catch (error) {
+                console.error('Error parsing userDeals:', error);
+                localStorage.removeItem('userDeals');
+            }
             this.deal = localDeals.find(d => d.dealId === this.dealId);
 
             // If not found, load from JSON
@@ -192,7 +204,13 @@ class DealInvite {
         };
 
         // Save user to localStorage
-        const existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        let existingUsers = [];
+        try {
+            existingUsers = JSON.parse(localStorage.getItem('registeredUsers') || '[]');
+        } catch (error) {
+            console.error('Error parsing registeredUsers:', error);
+            localStorage.removeItem('registeredUsers');
+        }
         existingUsers.push(newUser);
         localStorage.setItem('registeredUsers', JSON.stringify(existingUsers));
 
@@ -202,7 +220,13 @@ class DealInvite {
         this.deal.status = 'pending-payment';
 
         // Save updated deal
-        const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+        let localDeals = [];
+        try {
+            localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+        } catch (error) {
+            console.error('Error parsing userDeals:', error);
+            localStorage.removeItem('userDeals');
+        }
         const dealIndex = localDeals.findIndex(d => d.dealId === this.dealId);
         if (dealIndex !== -1) {
             localDeals[dealIndex] = this.deal;

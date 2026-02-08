@@ -35,17 +35,23 @@ class History {
             this.users = usersArray;
 
             // Load deals from localStorage and merge
-            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            let localDeals = [];
+            try {
+                localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            } catch (error) {
+                console.error('Error parsing userDeals:', error);
+                localStorage.removeItem('userDeals');
+            }
             allDeals = [...localDeals, ...allDeals];
 
             // Filter completed deals and user transactions
             this.deals = allDeals.filter(deal => 
                 deal.status === 'completed' && 
-                (deal.buyerId === this.currentUser.id || deal.sellerId === this.currentUser.id)
+                (deal.buyerId == this.currentUser.id || deal.sellerId == this.currentUser.id)
             );
 
             this.transactions = transactionsArray.filter(t => 
-                t.userId === this.currentUser.id
+                t.userId == this.currentUser.id
             );
 
             this.renderHistory();
@@ -124,8 +130,8 @@ class History {
 
         return combined.map(item => {
             if (item.type === 'deal') {
-                const otherPartyId = item.buyerId === this.currentUser.id ? item.sellerId : item.buyerId;
-                const otherParty = this.users.find(u => u.id === otherPartyId);
+                const otherPartyId = item.buyerId == this.currentUser.id ? item.sellerId : item.buyerId;
+                const otherParty = this.users.find(u => u.id == otherPartyId);
 
                 return `
                     <a href="deal-detail.html?id=${item.id}" style="display: block; padding: 16px 0; border-bottom: 1px solid var(--border-color); text-decoration: none; color: inherit;">
@@ -192,8 +198,8 @@ class History {
             <div style="background: white; padding: 20px; border-radius: 12px;">
                 <h3 style="margin-bottom: 16px;">Completed Deals</h3>
                 ${this.deals.map(deal => {
-                    const otherPartyId = deal.buyerId === this.currentUser.id ? deal.sellerId : deal.buyerId;
-                    const otherParty = this.users.find(u => u.id === otherPartyId);
+                    const otherPartyId = deal.buyerId == this.currentUser.id ? deal.sellerId : deal.buyerId;
+                    const otherParty = this.users.find(u => u.id == otherPartyId);
 
                     return `
                         <a href="deal-detail.html?id=${deal.id}" style="display: block; padding: 16px; background: var(--bg-secondary); border-radius: 8px; margin-bottom: 12px; text-decoration: none; color: inherit;">

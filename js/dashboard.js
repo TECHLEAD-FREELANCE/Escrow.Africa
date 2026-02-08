@@ -28,7 +28,13 @@ class Dashboard {
             let allDeals = Array.isArray(dealsData) ? dealsData : (dealsData.deals || []);
             
             // Load deals from localStorage and merge
-            const localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            let localDeals = [];
+            try {
+                localDeals = JSON.parse(localStorage.getItem('userDeals') || '[]');
+            } catch (error) {
+                console.error('Error parsing userDeals from localStorage:', error);
+                localStorage.removeItem('userDeals'); // Clear corrupted data
+            }
             allDeals = [...localDeals, ...allDeals];
             
             this.deals = allDeals;
@@ -38,7 +44,7 @@ class Dashboard {
             const notificationsData = await notificationsResponse.json();
             const notificationsArray = Array.isArray(notificationsData) ? notificationsData : (notificationsData.notifications || []);
             this.notifications = notificationsArray.filter(
-                n => n.userId === this.currentUser.id
+                n => n.userId == this.currentUser.id
             );
         } catch (error) {
             console.error('Error loading data:', error);
@@ -82,7 +88,7 @@ class Dashboard {
 
         // Get user's recent deals
         const userDeals = this.deals.filter(deal => 
-            deal.buyerId === this.currentUser.id || deal.sellerId === this.currentUser.id
+            deal.buyerId == this.currentUser.id || deal.sellerId == this.currentUser.id
         ).slice(0, 5);
 
         if (userDeals.length === 0) {
@@ -98,7 +104,7 @@ class Dashboard {
         container.innerHTML = userDeals.map(deal => {
             const statusClass = this.getStatusClass(deal.status);
             const statusText = this.getStatusText(deal.status);
-            const isBuyer = deal.buyerId === this.currentUser.id;
+            const isBuyer = deal.buyerId == this.currentUser.id;
             const otherParty = isBuyer ? deal.sellerName : deal.buyerName;
 
             return `
