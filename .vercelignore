@@ -1,0 +1,12 @@
+# Files to ignore during Vercel deployment
+node_modules
+.git
+.vscode
+*.log
+.DS_Store
+*.md
+save-user.php
+test.html
+demo.html
+clear-data.html
+clear-storage.html

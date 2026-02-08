@@ -1,0 +1,16 @@
+{
+  "name": "escrow-africa-prototype",
+  "version": "1.0.0",
+  "description": "Escrow Africa - Secure Transactions Platform",
+  "scripts": {
+    "dev": "vercel dev",
+    "deploy": "vercel"
+  },
+  "keywords": [
+    "escrow",
+    "africa",
+    "transactions"
+  ],
+  "author": "",
+  "license": "ISC"
+}

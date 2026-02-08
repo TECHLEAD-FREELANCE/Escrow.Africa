@@ -261,7 +261,7 @@ class Signup {
 
         // Try to save to server (if backend is available)
         try {
-            const response = await fetch('save-user.php', {
+            const response = await fetch('/api/save-user', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
