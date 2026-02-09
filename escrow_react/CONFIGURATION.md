@@ -9,7 +9,7 @@
 - ✅ Zustand for state management
 - ✅ React Query for data fetching
 - ✅ React Hot Toast for notifications
-- ✅ Lucide React for icons
+- ✅ Lucide React for icon
 
 #### 2. **Supabase Integration**
 - ✅ Created `src/lib/supabase.js` - Supabase client and helper functions
