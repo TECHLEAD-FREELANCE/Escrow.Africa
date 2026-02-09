@@ -111,16 +111,6 @@ export default function Login() {
           </button>
         </form>
         
-        {/* Demo Notice */}
-        <div className="bg-blue-50 border border-blue-200 rounded-xl p-4 text-sm">
-          <p className="font-semibold text-blue-900 mb-2">📝 First Time Setup:</p>
-          <div className="space-y-1 text-blue-800">
-            <p>1. Configure Supabase (see README)</p>
-            <p>2. Create an account via Sign Up</p>
-            <p>3. Login with your credentials</p>
-          </div>
-        </div>
-        
         {/* Signup Link */}
         <div className="text-center">
           <p className="text-gray-600">
