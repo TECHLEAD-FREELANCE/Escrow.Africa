@@ -24,12 +24,7 @@ export default function Dashboard() {
             <Menu className="w-6 h-6 text-gray-700" />
           </button>
           
-          <div className="flex items-center gap-2">
-            <div className="w-8 h-8 bg-[#0d9488] rounded-lg flex items-center justify-center">
-              <span className="text-white font-bold text-sm">P</span>
-            </div>
-            <h1 className="text-lg font-semibold text-gray-900">Escrow Africa</h1>
-          </div>
+          <h1 className="text-lg font-semibold text-gray-900">Escrow Africa</h1>
           
           <button 
             onClick={() => setShowNotifications(true)}

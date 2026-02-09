@@ -40,10 +40,7 @@ export default function Login() {
       <div className="w-full max-w-md bg-white rounded-3xl shadow-2xl p-8 space-y-6">
         {/* Logo */}
         <div className="text-center space-y-2">
-          <div className="w-20 h-20 bg-[#0d9488] rounded-2xl flex items-center justify-center mx-auto">
-            <span className="text-white font-bold text-3xl">P</span>
-          </div>
-          <h1 className="text-2xl font-bold text-gray-900">Escrow Africa</h1>
+          <h1 className="text-3xl font-bold text-gray-900">Escrow Africa</h1>
           <p className="text-gray-600">Secure payment protection</p>
         </div>
         
