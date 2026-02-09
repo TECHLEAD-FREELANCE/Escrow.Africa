@@ -9,7 +9,7 @@ export default function Login() {
   const { login, loading } = useAuthStore();
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
-    email: '',
+    username: '',
     password: '',
     remember: false,
   });
@@ -17,7 +17,7 @@ export default function Login() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     
-    const result = await login(formData.email, formData.password);
+    const result = await login(formData.username, formData.password);
     
     if (result.success) {
       toast.success('Login successful!');
@@ -43,7 +43,7 @@ export default function Login() {
           <div className="w-20 h-20 bg-[#0d9488] rounded-2xl flex items-center justify-center mx-auto">
             <span className="text-white font-bold text-3xl">P</span>
           </div>
-          <h1 className="text-2xl font-bold text-gray-900">Escrow.Africa</h1>
+          <h1 className="text-2xl font-bold text-gray-900">Escrow Africa</h1>
           <p className="text-gray-600">Secure payment protection</p>
         </div>
         
@@ -51,14 +51,14 @@ export default function Login() {
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700 mb-2">
-              Email Address
+              Username
             </label>
             <input
-              type="email"
-              name="email"
-              value={formData.email}
+              type="text"
+              name="username"
+              value={formData.username}
               onChange={handleChange}
-              placeholder="Enter your email"
+              placeholder="Enter your username"
               className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500 focus:border-transparent transition-all"
               required
             />

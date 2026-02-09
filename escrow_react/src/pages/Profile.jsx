@@ -10,8 +10,10 @@ export default function Profile() {
   const [editing, setEditing] = useState(false);
   const [formData, setFormData] = useState({
     fullName: user?.fullName || '',
+    username: user?.username || '',
     email: user?.email || 'user@example.com',
     phone: user?.phone || '+254712345678',
+    password: '••••••••',
   });
   
   const handleChange = (e) => {
@@ -93,6 +95,18 @@ export default function Profile() {
               </div>
               
               <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Username</label>
+                <input
+                  type="text"
+                  name="username"
+                  value={formData.username}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  required
+                />
+              </div>
+              
+              <div>
                 <label className="block text-sm font-medium text-gray-700 mb-2">Email</label>
                 <input
                   type="email"
@@ -116,6 +130,18 @@ export default function Profile() {
                 />
               </div>
               
+              <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">Password</label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 bg-gray-50 border border-gray-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-teal-500"
+                  placeholder="Enter new password to change"
+                />
+              </div>
+              
               <button
                 type="submit"
                 className="w-full bg-teal-600 text-white py-3 rounded-xl font-semibold hover:bg-teal-700"
@@ -125,6 +151,14 @@ export default function Profile() {
             </form>
           ) : (
             <div className="space-y-4">
+              <div className="flex items-center gap-3 text-gray-700">
+                <User className="w-5 h-5 text-gray-400" />
+                <div>
+                  <p className="text-sm text-gray-500">Username</p>
+                  <p className="font-medium">@{user?.username || 'username'}</p>
+                </div>
+              </div>
+              
               <div className="flex items-center gap-3 text-gray-700">
                 <Mail className="w-5 h-5 text-gray-400" />
                 <div>
@@ -138,6 +172,14 @@ export default function Profile() {
                 <div>
                   <p className="text-sm text-gray-500">Phone</p>
                   <p className="font-medium">{formData.phone}</p>
+                </div>
+              </div>
+              
+              <div className="flex items-center gap-3 text-gray-700">
+                <Lock className="w-5 h-5 text-gray-400" />
+                <div>
+                  <p className="text-sm text-gray-500">Password</p>
+                  <p className="font-medium">{formData.password}</p>
                 </div>
               </div>
             </div>
@@ -171,7 +213,7 @@ export default function Profile() {
         </button>
         
         <p className="text-center text-sm text-gray-500 py-4">
-          Version 1.0.0 • © 2026 Escrow.Africa
+          Version 1.0.0 • © 2026 Escrow Africa
         </p>
       </div>
     </div>

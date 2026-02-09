@@ -13,7 +13,7 @@ export default function CreateDeal() {
     amount: '',
     timeline: '3',
     category: 'Services',
-    role: 'buyer',
+    role: 'seller',
   });
   const [showShareLink, setShowShareLink] = useState(false);
   const [generatedLink, setGeneratedLink] = useState('');
@@ -203,34 +203,6 @@ export default function CreateDeal() {
                   <option key={cat} value={cat}>{cat}</option>
                 ))}
               </select>
-            </div>
-          </div>
-          
-          <div>
-            <label className="block text-sm font-medium text-gray-700 mb-2">Your Role</label>
-            <div className="grid grid-cols-2 gap-3">
-              <button
-                type="button"
-                onClick={() => setFormData(prev => ({ ...prev, role: 'buyer' }))}
-                className={`py-3 rounded-xl font-medium transition-all ${
-                  formData.role === 'buyer'
-                    ? 'bg-teal-600 text-white'
-                    : 'bg-gray-100 text-gray-700'
-                }`}
-              >
-                Buyer
-              </button>
-              <button
-                type="button"
-                onClick={() => setFormData(prev => ({ ...prev, role: 'seller' }))}
-                className={`py-3 rounded-xl font-medium transition-all ${
-                  formData.role === 'seller'
-                    ? 'bg-teal-600 text-white'
-                    : 'bg-gray-100 text-gray-700'
-                }`}
-              >
-                Seller
-              </button>
             </div>
           </div>
         </div>
